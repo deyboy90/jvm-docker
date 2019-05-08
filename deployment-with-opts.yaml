@@ -1,15 +1,18 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: java-app
+  name: java-app-aware
 spec:
   replicas: 3
   template:
     metadata:
       labels:
-          app: java-app
+          app: java-app-aware
     spec:
       containers:
+      - env:
+        - name: JAVA_OPTS
+          value: "-XX:+UnlockExperimentalVMOptions  -XX:+UseCGroupMemoryLimitForHeap  -XshowSettings:vm"
       - name: java-app
         image: gcr.io/core-autobuilds-poc/fill-heap:0.1
         ports:

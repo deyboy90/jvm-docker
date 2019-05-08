@@ -1,4 +1,5 @@
 FROM openjdk:8u131
 WORKDIR	/home
-ADD FillHeap.class /home/FillHeap.class
-CMD $JAVA_HOME/bin/java $JAVA_OPTS FillHeap
+ADD FillHeap.java /home/FillHeap.java
+RUN $JAVA_HOME/bin/javac FillHeap.java
+CMD $JAVA_HOME/bin/java $JAVA_OPTS FillHeap $ARGS

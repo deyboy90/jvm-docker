@@ -3,19 +3,17 @@
 ### Handy commands
 docker kill $(docker ps -q)
 
-### Compile class
-docker run -v /Users/a.dey/Projects/other-projects/jvm-docker/:/home -w /home openjdk:8u121 javac GenerateOOM.java
-
 ## Dockerize a java app and run it 
 ```
 docker build . -t fill-heap:0.1 -f Dockerfile-java8-basic
 docker run -d -m 250MB  fill-heap:0.1
+docker run -d -m 250MB  -e JAVA_OPTS='-XX:+UnlockExperimentalVMOptions  -XX:+UseCGroupMemoryLimitForHeap  -XshowSettings:vm' fill-heap:0.1
 ```
 
 ## Starting tests
 
 ### What happens on Java 8u121?
-`docker run -m 250MB openjdk:8u121 java -XshowSettings:vm -version`
+`docker run -m 250MB openjdk:8u131 java -XshowSettings:vm -version`
 
 ### Moving to Java 8u131
 
