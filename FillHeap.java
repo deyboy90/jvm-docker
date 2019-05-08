@@ -16,17 +16,15 @@ public class FillHeap {
                         runtime.totalMemory() / mb, runtime.maxMemory() / mb));
                 System.out.println(String.format("Adding memory: %s MB", memoryToAdd/mb));
 
-                if (runtime.freeMemory() <= memoryToAdd) {
+                if (runtime.totalMemory() + memoryToAdd >= runtime.maxMemory()) {
                     topUp -= 1 * mb;
-                    continue;
                 }
 
                 if (memoryToAdd >= 0) {
                     long[] additional = new long[memoryToAdd];
-
                 }
                 topUp += 1 * mb; // increasing it in every loop
-                Thread.sleep(500);
+                Thread.sleep(1000);
             }
         } catch (OutOfMemoryError e) {
             System.out.println("OOM Caught, praying for rescue ...");
