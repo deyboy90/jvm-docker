@@ -1,17 +1,17 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: java-app
+  name: java-app-aware
 spec:
-  replicas: 6
+  replicas: 3
   template:
     metadata:
       labels:
-          app: java-app
+          app: java-app-aware
     spec:
       containers:
-      - name: java-app
-        image: gcr.io/core-autobuilds-poc/fill-heap:0.2
+      - name: java-app-aware
+        image: localhost:5000/fill-heap:0.1
         ports:
         - containerPort: 80
         resources:
@@ -21,4 +21,4 @@ spec:
             memory: "500Mi"
         env:
         - name: JAVA_OPTS
-          value: "-XshowSettings:vm"
+          value: "-XX:+UnlockExperimentalVMOptions  -XX:+UseCGroupMemoryLimitForHeap -XX:MaxRAMFraction=2 -XshowSettings:vm"

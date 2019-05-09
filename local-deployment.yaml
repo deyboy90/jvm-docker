@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: java-app
 spec:
-  replicas: 6
+  replicas: 3
   template:
     metadata:
       labels:
@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: java-app
-        image: gcr.io/core-autobuilds-poc/fill-heap:0.2
+        image: localhost:5000/fill-heap:0.1
         ports:
         - containerPort: 80
         resources:

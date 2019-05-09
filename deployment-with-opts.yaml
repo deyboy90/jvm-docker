@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: java-app-aware
 spec:
-  replicas: 2
+  replicas: 6
   template:
     metadata:
       labels:
@@ -11,14 +11,14 @@ spec:
     spec:
       containers:
       - name: java-app-aware
-        image: gcr.io/core-autobuilds-poc/fill-heap:0.1
+        image: gcr.io/core-autobuilds-poc/fill-heap:0.2
         ports:
         - containerPort: 80
         resources:
           requests:
-            memory: "1000Mi"
+            memory: "500Mi"
           limits:
-            memory: "1500Mi"
+            memory: "500Mi"
         env:
         - name: JAVA_OPTS
-          value: "-XX:+UnlockExperimentalVMOptions  -XX:+UseCGroupMemoryLimitForHeap  -XshowSettings:vm"
+          value: "-XX:+UnlockExperimentalVMOptions  -XX:+UseCGroupMemoryLimitForHeap -XX:MaxRAMFraction=2 -XshowSettings:vm"
